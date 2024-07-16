@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>わからないこと管理システム</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0e5ec;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: #4a4a4a;
+            margin-bottom: 20px;
+        }
+        .neumorphic {
+            background: #e0e5ec;
+            border-radius: 50px;
+            box-shadow: 20px 20px 60px #bec3c9, -20px -20px 60px #ffffff;
+            padding: 20px;
+            margin: 20px;
+        }
+        .timer {
+            font-size: 48px;
+            margin: 20px 0;
+            color: #4a4a4a;
+        }
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 50px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        .btn:active::after {
+            animation: ripple 0.6s ease-out;
+        }
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        #startTimer, #stopTimer {
+            background: #e0e5ec;
+            color: #4a4a4a;
+            box-shadow: 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
+                        -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
+        }
+        #startTimer:active, #stopTimer:active {
+            box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2),
+                        inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background: #e0e5ec;
+            box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff;
+            margin-right: 10px;
+        }
+        label {
+            margin-right: 10px;
+        }
+        select {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background: #e0e5ec;
+            box-shadow: inset 2px 2px 5px #babecc, inset -5px -5px 10px #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>わからないこと管理システム</h1>
+        <div class="neumorphic">
+            <div id="countdown" class="timer">15:00</div>
+            <div>
+                <label for="timerDuration">タイマー設定 (分):</label>
+                <input type="number" id="timerDuration" min="1" max="60" value="15">
+            </div>
+            <div>
+                <label for="soundSelect">終了音:</label>
+                <select id="soundSelect">
+                    <option value="beep">ビープ音</option>
+                    <option value="bell">ベル音</option>
+                    <option value="chime">チャイム音</option>
+                </select>
+            </div>
+            <button id="startTimer" class="btn">開始</button>
+            <button id="stopTimer" class="btn">停止</button>
+        </div>
+    </div>
+    <audio id="timerSound">
+        <source src="" type="audio/mpeg">
+    </audio>
+    <script src="renderer.js"></script>
+</body>
+</html>
